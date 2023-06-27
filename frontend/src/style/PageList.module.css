@@ -1,0 +1,62 @@
+.mainList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200vh;
+    height: 80%;
+}
+
+.boxTableList {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    position: absolute;
+    top: 26vh;
+}
+
+.tableHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+
+    background-color: #FFD836;
+    /* background-color: rgba(46, 50, 60, 0.6); */
+    /* background: linear-gradient(119.15deg, #2E374B -13.54%, #292F3C 118.09%);
+    box-shadow: 9.71163px 11.654px 77.693px rgba(84, 135, 183, 0.08); */
+}
+
+.boxFiltros {
+    display: flex;
+    flex-direction: row;
+}
+
+.divListaParticipantes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #FFD836;
+    padding-right: 3vh;
+    padding-left: 3vh;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
+    border-radius: 2px;
+}
+
+
+.divRadioButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+}
+
+.divRadioButton span {
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 700;
+}
