@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
 import { create, update } from "../actions/tarefaAction";
 
-import style from "../style/Churras.module.css";
+import style from "../style/Tarefa.module.css";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,6 +13,8 @@ import Modal from '@mui/material/Modal';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import EditIcon from '@mui/icons-material/Edit';
 
+import ListaTarefas from "../pages/ListaTarefas";
+
 const styleMui = {
     position: 'absolute',
     top: '50%',
@@ -21,7 +22,6 @@ const styleMui = {
     transform: 'translate(-50%, -50%)',
     width: 500,
     bgcolor: '#FDEE2F',
-    // border: '2px solid #000',
     boxShadow: 24,
     p: 4,
 };
@@ -45,18 +45,12 @@ const ModalNovaTarefa = ({ botaoEditar, tarefaEditar }) => {
     const handleClose = () => setOpen(false);
 
     const dispatch = useDispatch();
-    let params = useParams();
-
-
-    // 
-    // useEffect(() => {
-    //     editarTarefa(params);
-    // }, [params.id]);
 
 
     // Método usado para setar as informações do novo churras 
     const handleInputChangeTarefa = event => {
         const { name, value } = event.target;
+        
         setTarefa({ ...tarefa, [name]: value });
     };
 
@@ -64,19 +58,25 @@ const ModalNovaTarefa = ({ botaoEditar, tarefaEditar }) => {
     // 
     const cadastrarNovaTarefa = () => {
 
+        if(!tarefa.data || !tarefa.titulo || !tarefa.descricao){
+            
+            
+            alert("Um ou mais campos obrigatorios precisam ser preenchidos");
+
+            return
+        }
+
         if(tarefaEditar) {
-            console.log("tarefa para editar!!!! entrou aqui???");
             dispatch(update(tarefa));
         } else {
             dispatch(create(tarefa));
         }
 
-        setTarefa(initialStateTarefa);
+        setTarefa(initialStateTarefa); 
     }
 
     // Método utilizado para editar uma tarefa selecionada
     const editarTarefa = () => {
-        console.log("Editar Tarefa!!! " + tarefaEditar.titulo);
         setTarefa(tarefaEditar);
         handleOpen();
     }
@@ -94,7 +94,7 @@ const ModalNovaTarefa = ({ botaoEditar, tarefaEditar }) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={styleMui}>
-                    <form className={style.formNewChurras}>
+                    <form className={style.formNovaTarefa}>
                         <div>
                             <h1><b>Cadastrar Nova Tarefa</b></h1>
                         </div>
@@ -124,7 +124,7 @@ const ModalNovaTarefa = ({ botaoEditar, tarefaEditar }) => {
                             </div>
                         </div>
                     </form>
-                    <div className={style.divButtonCadastrarNovoChurras}>
+                    <div className={style.divButtonCadastrarNovaTarefa}>
                         <button type="submit" onClick={cadastrarNovaTarefa}>
                             Cadastrar
                         </button>

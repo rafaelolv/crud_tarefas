@@ -18,10 +18,6 @@ export const create = (tarefa) => async (dispatch) => {
 // 
 export const retrieveAll = (listaTarefas) => (dispatch) => {
     try {
-        // const listChurras = list;
-
-        console.log("2 - retrieveAllTarefas action");
-        console.table(listaTarefas);
     
         dispatch({
             type: RETRIEVE_ALL,
@@ -37,9 +33,6 @@ export const retrieveAll = (listaTarefas) => (dispatch) => {
 // 
 export const update = (tarefaAtualizada) => (dispatch) => {
     try {
-        console.log("tarefaAtualizada action");
-        console.table(tarefaAtualizada);
-      
         dispatch({
           type: UPDATE,
           payload: tarefaAtualizada,
@@ -47,19 +40,4 @@ export const update = (tarefaAtualizada) => (dispatch) => {
     } catch (err) {
         console.log(err);
     }
-}
-
-
-export const filter = (tarefaAtualizada) => (dispatch) => {
-  try {
-      console.log("tarefaAtualizada action");
-      console.table(tarefaAtualizada);
-    
-      dispatch({
-        type: FILTER,
-        payload: tarefaAtualizada,
-      });
-  } catch (err) {
-      console.log(err);
-  }
 }

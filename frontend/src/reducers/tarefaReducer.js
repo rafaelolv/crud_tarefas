@@ -12,7 +12,7 @@ const list = [
     },
     {
         id: 2,
-        data: "2023-01-01",
+        data: "2023-05-08",
         isConcluida: true,
         titulo: "Pagar contas",
         descricao: "Pagar hoje as contas de água, luz e internet!",
@@ -38,12 +38,10 @@ function tarefaReducer(tarefas = initialState, action) {
     switch (type) {
         case RETRIEVE_ALL:
 
-            console.log("3 - retrieve payload ");
-            console.log(payload);
-
             return payload;
         
         case CREATE:
+
             return [...tarefas, payload];
 
         case UPDATE:

@@ -13,6 +13,9 @@ body {
     font-size: 100%;
     min-height: 100vh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* background-color: rgba(46, 50, 60, 0.6); */
+    background: linear-gradient(119.15deg, #2E374B -13.54%, #292F3C 118.09%);
+    box-shadow: 9.71163px 11.654px 77.693px rgba(84, 135, 183, 0.08);
 }
 
 .header {

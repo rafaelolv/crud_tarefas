@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { retrieveAll } from "../actions/tarefaAction";
 
 import ModalNovaTarefa from "../components/ModalNovaTarefa";
 import TableHeader from "../components/TableHeader";
@@ -35,18 +33,13 @@ import style from "../style/PageList.module.css";
 
 const ListaTarefas = () => {
 
-    // const [listaTarefas, setListaTarefas] = useState(useSelector(state => state.tarefas)); 
-
-    // setLista(useSelector(state => state.tarefas));
-
     const listaTarefas = useSelector(state => state.tarefas);
-    const lista = [...listaTarefas];
+
+    const [status, setStatus] = useState("");
+
+    const [tarefas, setTarefas] = useState(listaTarefas);
+
     const dispatch = useDispatch();
-
-
-    // useEffect(() => {
-    //     dispatch(retrieveAll(listaTarefas));
-    //   }, []);
 
     const BOTAOEDITAR = "BOTAOEDITAR";
 
@@ -79,8 +72,7 @@ const ListaTarefas = () => {
     // Método para formatar datas
     const formataData = (data) => {
 
-        let dataFormatada = (adicionaZero(new Date(data).getDate().toString()) + "/" + (adicionaZero(new Date(data).getMonth()+1).toString()));
-        console.log(dataFormatada);
+        let dataFormatada = adicionaZero(new Date(data).getDate()).toString() + "/" + adicionaZero(new Date(data).getMonth()+1).toString() + "/" + new Date(data).getFullYear().toString();
 
         return dataFormatada;
     }
@@ -96,44 +88,24 @@ const ListaTarefas = () => {
     //Método responsável por ordenar as tarefas por data de criação (mais recentes primeiro ou mais antigas primeiro).
     const filtrarDatas = (valor) => {
 
-        let listaFiltrada = listaTarefas.sort(function(a, b) { 
-            return new Date(a.data).getTime() - new Date(b.data).getTime() 
+        let listaDataFiltrada = listaTarefas.sort(function(a, b) { 
+            return new Date(b.data).getTime() - new Date(a.data).getTime() 
         });
 
         if(valor === "antigas") {
-            listaFiltrada.reverse();
+            listaDataFiltrada.reverse();
         }
 
-        console.log("Aqui em retrieve do filtrar");
-
-        // setListaTarefas([...listaFiltrada]);
-
-        // dispatch(retrieveAll(listaFiltrada));
-
-        // console.table(listaFiltrada);
+        setTarefas([...listaDataFiltrada]);
     }
 
 
     // filtrar as tarefas por status (concluídas ou pendentes).
     const filtrarTarefasByStatus = (status) => {
 
-        let lista = [...listaTarefas];
+        setStatus(status);
 
-        console.log("1 - listaStatus page");
-        console.log(lista);
-
-        let listaTarefasFiltrada = lista.filter((tarefa) => tarefa.isConcluida === status);
-
-        console.log("listaTarefas");
-        console.table(listaTarefas);
-
-        console.log("lista");
-        console.table(lista);
-
-        console.log("listaTarefasFiltrada");
-        console.table(listaTarefasFiltrada);
-
-        // dispatch(retrieveAll(listaTarefasFiltrada));
+        return status;
     }
 
 
@@ -170,8 +142,8 @@ const ListaTarefas = () => {
                     <TableCell component="th" scope="row">
                         {checkedState[index] === true ? <s> {tarefa.titulo}</s> : tarefa.titulo}
                     </TableCell>
-                    <TableCell align="right"></TableCell>
-                    <TableCell >{ getDataFormatada(tarefa.data) }</TableCell>
+                    <TableCell align="right"></TableCell> 
+                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data)} </s> : getDataFormatada(tarefa.data) }</TableCell>
                     <TableCell align="right">
                         <ModalNovaTarefa botaoEditar={BOTAOEDITAR} tarefaEditar={tarefa} />
                     </TableCell>
@@ -225,9 +197,19 @@ const ListaTarefas = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {listaTarefas && listaTarefas.map((tarefa, index) => (
+                            {status 
+                                ? listaTarefas && listaTarefas.map((tarefa, index) => (
+                                    status === tarefa.isConcluida
+                                        ? <Row key={listaTarefas.name} tarefa={tarefa} index={index} />
+                                        : <></>
+                                ))
+
+                                : listaTarefas && listaTarefas.map((tarefa, index) => (
                                 <Row key={listaTarefas.name} tarefa={tarefa} index={index} />
-                            ))}
+                                )) 
+
+                            }
+
                         </TableBody>
                     </Table>
                 </TableContainer>

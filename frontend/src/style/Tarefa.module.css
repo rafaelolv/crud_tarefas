@@ -1,0 +1,52 @@
+.formNovaTarefa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.formNovaTarefa > div {
+    padding-bottom: 1vh;
+}
+
+.formNovaTarefa h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.formNovaTarefa input {
+    width: 30vh;
+    height: 5vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    text-decoration: none;
+}
+
+.formNovaTarefa label {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.divButtonCadastrarNovaTarefa {
+    display: flex;
+    justify-content: center;
+}
+
+.divButtonCadastrarNovaTarefa button {
+    width: 30vh;
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 2vh 7vh;
+    margin-top: 5vh;
+    border-radius: 18px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+}

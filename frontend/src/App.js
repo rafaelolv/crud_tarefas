@@ -14,9 +14,6 @@ export default props => {
 			<Header />
 			<Routes>
 				<Route exact path={"/"} element={<ListaTarefas />} />
-				{/* <Route exact path={"/lista/:id"} element={<ListaTarefas />} /> */}
-				{/* <Route exact path={"/eventos"} element={<Eventos />} />
-				<Route exact path={"/lista/:id"} element={<ListaParticipantes />} /> */}
 			</Routes>
 		</BrowserRouter>
 	)
