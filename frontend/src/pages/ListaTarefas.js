@@ -49,8 +49,7 @@ const ListaTarefas = () => {
 
     // 
     const atualizaListaCheckedState = (tarefa) => {
-        // setCheckedState(...checkedState, tarefa.isConcluida);
-        
+        setCheckedState([...checkedState, tarefa.isConcluida]);
     }
 
     
@@ -61,14 +60,6 @@ const ListaTarefas = () => {
         );
         
         setCheckedState(updatedCheckedState);
-        
-        listaTarefas[position].isConcluida = updatedCheckedState;
-
-        console.log(listaTarefas[position]);
-
-        // dispatch(update(listaTarefas[position]));
-
-        console.table(listaTarefas);
     }
 
 
@@ -156,7 +147,7 @@ const ListaTarefas = () => {
                         {checkedState[index] === true ? <s> {tarefa.titulo}</s> : tarefa.titulo}
                     </TableCell>
                     <TableCell align="right"></TableCell> 
-                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data)} </s> : getDataFormatada(tarefa.data)}</TableCell>
+                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data)} </s> : getDataFormatada(tarefa.data) }</TableCell>
                     <TableCell align="right">
                         <ModalNovaTarefa botaoEditar={BOTAOEDITAR} tarefaEditar={tarefa} />
                     </TableCell>
