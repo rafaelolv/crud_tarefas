@@ -153,10 +153,10 @@ const ListaTarefas = () => {
                     </TableCell>
 
                     <TableCell component="th" scope="row">
-                        {checkedState[index] === true ? <s> {tarefa.titulo + " " + tarefa.isConcluida.toString()}</s> : tarefa.titulo + " " + tarefa.isConcluida.toString()}
+                        {checkedState[index] === true ? <s> {tarefa.titulo}</s> : tarefa.titulo}
                     </TableCell>
                     <TableCell align="right"></TableCell> 
-                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data) + " " + index} </s> : getDataFormatada(tarefa.data) + " " + index }</TableCell>
+                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data)} </s> : getDataFormatada(tarefa.data)}</TableCell>
                     <TableCell align="right">
                         <ModalNovaTarefa botaoEditar={BOTAOEDITAR} tarefaEditar={tarefa} />
                     </TableCell>
