@@ -27,7 +27,7 @@ const styleMui = {
 };
 
 
-const ModalNovaTarefa = ({ botaoEditar, tarefaEditar }) => {
+const ModalNovaTarefa = ({ botaoEditar, tarefaEditar, atualizaListaCheckedState }) => {
 
     const initialStateTarefa = {
         id: uuidv4(),
@@ -65,6 +65,8 @@ const ModalNovaTarefa = ({ botaoEditar, tarefaEditar }) => {
 
             return
         }
+
+        atualizaListaCheckedState(tarefa);
 
         if(tarefaEditar) {
             dispatch(update(tarefa));

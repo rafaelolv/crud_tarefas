@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { update } from "../actions/tarefaAction";
+
 import ModalNovaTarefa from "../components/ModalNovaTarefa";
 import TableHeader from "../components/TableHeader";
 
@@ -30,22 +32,26 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import style from "../style/PageList.module.css";
 
 
-
 const ListaTarefas = () => {
 
     const listaTarefas = useSelector(state => state.tarefas);
 
     const [status, setStatus] = useState("");
-
     const [tarefas, setTarefas] = useState(listaTarefas);
-
-    const dispatch = useDispatch();
-
-    const BOTAOEDITAR = "BOTAOEDITAR";
-
     const [checkedState, setCheckedState] = useState(
         new Array(listaTarefas.length).fill(false)
     );
+
+    const BOTAOEDITAR = "BOTAOEDITAR";
+
+    const dispatch = useDispatch();
+
+
+    // 
+    const atualizaListaCheckedState = (tarefa) => {
+        // setCheckedState(...checkedState, tarefa.isConcluida);
+        
+    }
 
     
     // 
@@ -57,6 +63,12 @@ const ListaTarefas = () => {
         setCheckedState(updatedCheckedState);
         
         listaTarefas[position].isConcluida = updatedCheckedState;
+
+        console.log(listaTarefas[position]);
+
+        // dispatch(update(listaTarefas[position]));
+
+        console.table(listaTarefas);
     }
 
 
@@ -114,6 +126,7 @@ const ListaTarefas = () => {
 
         const [open, setOpen] = useState(false);
       
+
         return (
             <>
                 <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -140,10 +153,10 @@ const ListaTarefas = () => {
                     </TableCell>
 
                     <TableCell component="th" scope="row">
-                        {checkedState[index] === true ? <s> {tarefa.titulo}</s> : tarefa.titulo}
+                        {checkedState[index] === true ? <s> {tarefa.titulo + " " + tarefa.isConcluida.toString()}</s> : tarefa.titulo + " " + tarefa.isConcluida.toString()}
                     </TableCell>
                     <TableCell align="right"></TableCell> 
-                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data)} </s> : getDataFormatada(tarefa.data) }</TableCell>
+                    <TableCell >{checkedState[index] === true ? <s>{ getDataFormatada(tarefa.data) + " " + index} </s> : getDataFormatada(tarefa.data) + " " + index }</TableCell>
                     <TableCell align="right">
                         <ModalNovaTarefa botaoEditar={BOTAOEDITAR} tarefaEditar={tarefa} />
                     </TableCell>
@@ -182,7 +195,7 @@ const ListaTarefas = () => {
     return (
         <main className={style.mainList}>
             <div className={style.boxTableList}>
-                <TableHeader filtrarDatas={filtrarDatas} filtrarTarefasByStatus={filtrarTarefasByStatus} />
+                <TableHeader filtrarDatas={filtrarDatas} filtrarTarefasByStatus={filtrarTarefasByStatus} atualizaListaCheckedState={atualizaListaCheckedState}  />
                 
                 <TableContainer component={Paper} style={{ width: '100%' }} >
                     <Table aria-label="collapsible table">
@@ -197,7 +210,7 @@ const ListaTarefas = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {status 
+                            {status !== ''
                                 ? listaTarefas && listaTarefas.map((tarefa, index) => (
                                     status === tarefa.isConcluida
                                         ? <Row key={listaTarefas.name} tarefa={tarefa} index={index} />

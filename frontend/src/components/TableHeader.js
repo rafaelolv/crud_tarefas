@@ -12,7 +12,7 @@ import style from "../style/PageList.module.css";
 
 
 
-const TableHeader = ({ filtrarDatas, filtrarTarefasByStatus }) => {
+const TableHeader = ({ filtrarDatas, filtrarTarefasByStatus, atualizaListaCheckedState }) => {
 
     const [ordem, setOrdem] = useState('');
 
@@ -34,7 +34,7 @@ const TableHeader = ({ filtrarDatas, filtrarTarefasByStatus }) => {
     return (
         <header className={style.tableHeader}>
             
-            <ModalNovaTarefa />
+            <ModalNovaTarefa atualizaListaCheckedState={atualizaListaCheckedState} />
             
             <div className={style.boxFiltros}>
                 <Box sx={{ minWidth: 160, margin: 1 }}>
@@ -47,6 +47,7 @@ const TableHeader = ({ filtrarDatas, filtrarTarefasByStatus }) => {
                             label="Ordem"
                             onChange={handleChangeOrdem}
                             >
+                            <MenuItem value={''}> - </MenuItem>
                             <MenuItem value={"recentes"}>Mais recentes</MenuItem>
                             <MenuItem value={"antigas"}>Mais antigas</MenuItem>
                             
@@ -63,6 +64,7 @@ const TableHeader = ({ filtrarDatas, filtrarTarefasByStatus }) => {
                             label="Status"
                             onChange={handleChangeStatus}
                             >
+                            <MenuItem value={''}>Todas</MenuItem>
                             <MenuItem value={true}>Concluídas</MenuItem>
                             <MenuItem value={false}>Pendentes</MenuItem>
                             
