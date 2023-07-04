@@ -66,11 +66,11 @@ const ModalNovaTarefa = ({ botaoEditar, tarefaEditar, atualizaListaCheckedState 
             return
         }
 
-        atualizaListaCheckedState(tarefa);
-
         if(tarefaEditar) {
             dispatch(update(tarefa));
         } else {
+            atualizaListaCheckedState(tarefa);
+
             dispatch(create(tarefa));
         }
 
